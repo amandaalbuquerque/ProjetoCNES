@@ -9,45 +9,50 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListFieldsComponent implements OnInit {
 
-  // myDataArray = [];
   public myDataArray: MatTableDataSource<any>;
+  public listResult = [];
 
   constructor(public lista: FirebaseServices) { }
 
   displayedColumns: string[] = ['nome', 'tipoUnidade', 'uf'];
 
   async ngOnInit() {
-
-    // this.myDataArray = [
-    //   {Nome: 'Hydrogen', TipoUnidade: 1.0079, UF: 'H'},
-    //   {Nome: 'Helium', TipoUnidade: 4.0026, UF: 'He'},
-    //   {Nome: 'Lithium', TipoUnidade: 6.941, UF: 'Li'},
-    //   {Nome: 'Beryllium', TipoUnidade: 9.0122, UF: 'Be'},
-    //   {Nome: 'Boron', TipoUnidade: 10.811, UF: 'B'},
-    //   {Nome: 'Carbon', TipoUnidade: 12.0107, UF: 'C'},
-    //   {Nome: 'Nitrogen', TipoUnidade: 14.0067, UF: 'N'},
-    //   {Nome: 'Oxygen', TipoUnidade: 15.9994, UF: 'O'},
-    //   {Nome: 'Fluorine', TipoUnidade: 18.9984, UF: 'F'},
-    //   {Nome: 'Neon', TipoUnidade: 20.1797, UF: 'Ne'},
-    //   ];
-
-    const arraylist = [];
     let resultSize;
-    const listResult = [];
     await this.lista.getcnes().subscribe((response) => {
       resultSize = response.size;
       response.forEach(element => {
-        listResult.push(element.data());
+        this.listResult.push(element.data());
         resultSize--;
 
         if (resultSize == 0) {
-          this.myDataArray = new MatTableDataSource(listResult);
+          this.selectTab({ index: 0 });
         }
-        console.log('CONSOLE!', element.data());
       });
     });
+  }
 
-    console.log(arraylist);
-    console.log(this.myDataArray);
+  selectTab(event) {
+
+    switch (event.index) {
+      case 0:
+        const listResultNome = this.listResult.sort((x, y) => {
+          return ((x.Nome.toLowerCase() === y.Nome.toLowerCase()) ? 0 : ((x.Nome.toLowerCase() > y.Nome.toLowerCase()) ? 1 : -1));
+        });
+        this.myDataArray = new MatTableDataSource(listResultNome);
+        break;
+      case 1:
+        const listResultTipo = this.listResult.sort((x, y) => {
+          return ((x.TipoUnidade.toLowerCase() === y.TipoUnidade.toLowerCase()) ? 0 : ((x.TipoUnidade.toLowerCase() > y.TipoUnidade.toLowerCase()) ? 1 : -1));
+        });
+        this.myDataArray = new MatTableDataSource(listResultTipo);
+        break;
+      case 2:
+        const listResultUf = this.listResult.sort((x, y) => {
+          return ((x.UF.toLowerCase() === y.UF.toLowerCase()) ? 0 : ((x.UF.toLowerCase() > y.UF.toLowerCase()) ? 1 : -1));
+        });
+        this.myDataArray = new MatTableDataSource(listResultUf);
+      default:
+        break;
+    }
   }
 }

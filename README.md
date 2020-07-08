@@ -2,12 +2,12 @@
 
 Este projeto foi gerado com o [Angular CLI](https://github.com/angular/angular-cli) versão 10.0.1.
 
-Tem o objetivo de apresentar uma listagem do Cadastro Nacional de Estabelecimentos de Saúde (CNES), realizando sua divisão por tipo e estado (UF).
+Tem o objetivo de apresentar uma listagem do Cadastro Nacional de Estabelecimentos de Saúde (CNES), realizando sua ordenação por por tipo e estado (UF).
 Foi realizada uma rotina no Firebase para popular o banco de dados a partir do JSON. 
 
 ## Development
 
-Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub [GitHub](git clone https://github.com/...)
+Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub `https://github.com/amandaalbuquerque/ProjetoCNES`
 
 Também será necessário obter o Node.js, para prosseguir com o desenvolvimento do projeto. Para isso, acesse o link [Node](https://nodejs.org/en/download/).
 
@@ -22,14 +22,6 @@ Execute `ng generate component component-name` para gerar um novo componente. Vo
 ## Build
 
 Execute `ng build` para construir o projeto. Os artefatos de construção serão armazenados no diretório `dist /`. Use o sinalizador `--prod` para uma construção no ambiente de produção.
-
-## Running unit tests
-
-Execute o `ng test` para executar os testes de unidade via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Execute `ng e2e` para executar os testes de ponta a ponta via [Protractor](http://www.protractortest.org/).
 
 ## Further help
 
